@@ -34,6 +34,9 @@ const config = {
       '~src': path.resolve(__dirname, '../src')
     }
   },
+  externals: {
+    'BMap': 'BMap'
+  },
   module: {
     noParse: /es6-promise\.js$/, // avoid webpack shimming process
     rules: [
