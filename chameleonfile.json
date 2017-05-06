@@ -1,0 +1,6 @@
+{
+    "name": "dwf-order-app-hybrid-mock",
+    "port" : "3231",
+    "apisPath":"./mock-data",
+    "rootPath":"./dist"
+}

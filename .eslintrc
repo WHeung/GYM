@@ -1,0 +1,9 @@
+{
+    "extends": "vue",
+    "installedESLint": true,
+    "plugins": ["vue", "html"],
+    "rules": {
+        "indent": ["error", 2],
+        "no-useless-escape": 0
+    }
+}
