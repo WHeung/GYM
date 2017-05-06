@@ -1,15 +1,17 @@
 <template>
   <main>
     <BMap></BMap>
+    <Goods></Goods>
   </main>
 </template>
 
 <script>
 import * as types from '~src/store/types'
 import BMap from '~src/components/BMap.vue'
+import Goods from './Goods.vue'
 
 export default {
-  components: { BMap },
+  components: { BMap, Goods },
   created () {
     this.$store.dispatch(types.CLOSE_LOADING)
   }

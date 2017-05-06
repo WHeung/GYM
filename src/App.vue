@@ -39,6 +39,8 @@ html
   margin 0
   padding 0
   overflow-y scroll
+  @media screen and (max-width: 340px)
+    font-size 13px
 
 div,p,ul,ol,li,span,a,button,input,textarea,form
   margin:0
