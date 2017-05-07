@@ -1,36 +1,14 @@
 <template>
-  <div :class="$style.main">
-    <div :class="$style.item">
-      <img src="http://cdn01.dwfei.com/img/city/80LANKAWEI.png">
+  <div :class="$style.main" ref="scrollView">
+    <div :class="[$style.item,good.select && $style.active]" :ref="good.id" v-for='good in goods'>
+      <img :src="good.cover">
       <div :class="$style.msg">
-        <b>￥ 221 </b>
-        <span>独立房间</span>
+        <b>￥ {{good.price}} </b>
+        <span>{{good.name}}</span>
       </div>
       <div :class="$style.evaluate">
-        <span><i :class="$style.star"></i><i :class="$style.star"></i><i :class="$style.star"></i><i :class="$style.star"></i><i :class="$style.star"></i> </span>
-        <span>33条评价</span>
-      </div>
-    </div>
-    <div :class="$style.item">
-      <img src="http://cdn01.dwfei.com/img/city/80LANKAWEI.png">
-      <div :class="$style.msg">
-        <b>￥ 221 </b>
-        <span>独立房间</span>
-      </div>
-      <div :class="$style.evaluate">
-        <span><i :class="$style.star"></i><i :class="$style.star"></i><i :class="$style.star"></i><i :class="$style.star"></i><i :class="$style.star"></i> </span>
-        <span>33条评价</span>
-      </div>
-    </div>
-    <div :class="$style.item">
-      <img src="http://cdn01.dwfei.com/img/city/80LANKAWEI.png">
-      <div :class="$style.msg">
-        <b>￥ 221 </b>
-        <span>独立房间</span>
-      </div>
-      <div :class="$style.evaluate">
-        <span><i :class="$style.star"></i><i :class="$style.star"></i><i :class="$style.star"></i><i :class="$style.star"></i><i :class="$style.star"></i> </span>
-        <span>33条评价</span>
+        <span><i :class="$style.star" v-for='star in good.star'></i> </span>
+        <span>{{good.evaluateNum}}条评价</span>
       </div>
     </div>
   </div>
@@ -38,6 +16,35 @@
 
 <script>
 export default {
+  data () {
+    return {
+      goods: this.$store.state.map.stores
+    }
+  },
+  computed: {
+    // goods () {
+    //   return this.$store.state.map.stores
+    // }
+  },
+  props: ['selectId'],
+  watch: {
+    selectId: {
+      handler (val, oldVal) {
+        const goods = this.goods.map(item => {
+          item.select = (item.id === val)
+          return item
+        })
+        this.goods = [...goods]
+        this.$refs.scrollView.scrollLeft = this.$refs[val][0].offsetLeft - 20
+        console.log(this.$refs[val][0].offsetLeft)
+        // const active = this.$refs.good.find(item => {
+        //   return item.classList[1] === this.$style.active
+        // })
+        // console.log(active)
+      },
+      deep: true
+    }
+  }
 }
 </script>
 
@@ -60,13 +67,13 @@ export default {
     flex 0 0 48%
     margin-right 10px
     color #9b9b9b
-    border-top 4px solid transparent
     &:last-child
       padding-right 20px
-    &.active
+    &.active img
       border-color #32c47c
     width 40%
     img
+      border-top 4px solid transparent
       width 100%
 
   .msg

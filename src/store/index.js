@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import * as types from './types'
+import mapModule from './modules/map'
 
 Vue.use(Vuex)
 
@@ -76,6 +77,7 @@ const store = new Vuex.Store({
     }
   },
   modules: {
+    map: mapModule
   }
 })
 

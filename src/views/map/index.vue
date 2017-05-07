@@ -1,7 +1,7 @@
 <template>
   <main>
-    <BMap></BMap>
-    <Goods></Goods>
+    <BMap :stores='stores' :selectId='selectId'></BMap>
+    <Goods :selectId='selectId'></Goods>
   </main>
 </template>
 
@@ -14,6 +14,14 @@ export default {
   components: { BMap, Goods },
   created () {
     this.$store.dispatch(types.CLOSE_LOADING)
+  },
+  computed: {
+    stores () {
+      return this.$store.state.map.stores
+    },
+    selectId () {
+      return this.$store.state.map.selectId
+    }
   }
 }
 
