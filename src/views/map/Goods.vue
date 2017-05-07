@@ -1,17 +1,22 @@
 <template>
-  <div :class="$style.main" ref="scrollView">
-    <div :class="[$style.item,good.select && $style.active]" :ref="good.id" v-for='good in goods'>
-      <img :src="good.cover">
-      <div :class="$style.msg">
-        <b>￥ {{good.price}} </b>
-        <span>{{good.name}}</span>
-      </div>
-      <div :class="$style.evaluate">
-        <span><i :class="$style.star" v-for='star in good.star'></i> </span>
-        <span>{{good.evaluateNum}}条评价</span>
+  <section :class="$style.main">
+    <div :class="$style.btn">
+      <button type="button" name="button">筛选条件 ></button>
+    </div>
+    <div :class="$style.goods" ref="scrollView">
+      <div :class="[$style.item,good.select && $style.active]" :ref="good.id" v-for='good in goods'>
+        <img :src="good.cover">
+        <div :class="$style.msg">
+          <b>￥ {{good.price}} </b>
+          <span>{{good.name}}</span>
+        </div>
+        <div :class="$style.evaluate">
+          <span><i :class="$style.star" v-for='star in good.star'></i> </span>
+          <span>{{good.evaluateNum}}条评价</span>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -20,11 +25,6 @@ export default {
     return {
       goods: this.$store.state.map.stores
     }
-  },
-  computed: {
-    // goods () {
-    //   return this.$store.state.map.stores
-    // }
   },
   props: ['selectId'],
   watch: {
@@ -36,11 +36,6 @@ export default {
         })
         this.goods = [...goods]
         this.$refs.scrollView.scrollLeft = this.$refs[val][0].offsetLeft - 20
-        console.log(this.$refs[val][0].offsetLeft)
-        // const active = this.$refs.good.find(item => {
-        //   return item.classList[1] === this.$style.active
-        // })
-        // console.log(active)
       },
       deep: true
     }
@@ -54,12 +49,25 @@ export default {
     bottom 0
     left 0
     right 0
-    height 140px
     background #fff
-    padding 20px
     box-shadow 0 0 3px 2px rgba(0,0,0,.2)
-    overflow-x auto
+
+  .btn
+    position absolute
+    background #00a8ff
+    padding 10px 13px
+    left 50%
+    transform translateX(-50%)
+    top -50px
+    border-radius 100px
+    button
+      color #fff
+
+  .goods
+    height 140px
     display flex
+    overflow-x auto
+    padding 20px
     &::-webkit-scrollbar
       display none
 
