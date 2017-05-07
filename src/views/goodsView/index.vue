@@ -11,7 +11,7 @@
           <span>{{good.name}}</span>
         </div>
         <div :class="$style.evaluate">
-          <span><i :class="$style.star" v-for='star in good.star'></i> </span>
+          <span><i class="star" v-for='star in good.star'></i> </span>
           <span>{{good.evaluateNum}}条评价</span>
         </div>
       </div>
@@ -20,6 +20,8 @@
 </template>
 
 <script>
+import * as types from '~src/store/types'
+
 export default {
   data () {
     return {
@@ -57,6 +59,9 @@ export default {
     goDetail () {
       console.log(this.selectId)
     }
+  },
+  created () {
+    this.$store.dispatch(types.CLOSE_LOADING)
   }
 }
 </script>
@@ -111,12 +116,6 @@ export default {
     white-space nowrap
     height 20px
     line-height 20px
-    .star
-      display inline-block
-      width 15px
-      height 15px
-      background url(~src/public/star@2x.png) no-repeat
-      background-size 100% 100%
 
 
 

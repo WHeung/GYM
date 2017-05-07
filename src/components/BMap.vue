@@ -27,12 +27,10 @@ export default {
           var _self = this
           myCompOverlay.addEventListener('touchstart', function (e) { _self.handleClick(e, this) }.bind(myCompOverlay))
         })
-      },
-      deep: true
+      }
     },
     selectId: {
       handler (val, oldVal) {
-        console.log(val)
         const mkrs = this.map.getOverlays()
         const actMkr = mkrs.find(item => {
           return item.id === val
@@ -44,8 +42,7 @@ export default {
           oldMkr._div.className = 'map-point'
         }
         actMkr._div.className += ' active'
-      },
-      deep: true
+      }
     }
   },
   created () {

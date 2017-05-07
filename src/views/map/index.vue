@@ -1,6 +1,6 @@
 <template>
   <main>
-    <BMap :stores='stores' :selectId='selectId'></BMap>
+
     <Goods :selectId='selectId'></Goods>
   </main>
 </template>

@@ -1,7 +1,8 @@
 <template>
   <div id="app">
+    <BMap :stores='stores' :selectId='selectId'></BMap>
     <transition name="view" mode="out-in">
-      <router-view class="view" :class="{ready: loading}"></router-view>
+      <router-view :class="{ready: loading}"></router-view>
     </transition>
     <Toast></Toast>
     <Loading></Loading>
@@ -11,18 +12,24 @@
 </template>
 
 <script>
-import * as Types from './store/types'
-import Toast from './components/Toast.vue'
-import Loading from './components/loading.vue'
-import ApiLoading from './components/ApiLoading.vue'
-import popUp from './components/popUp.vue'
+import Toast from '~src/components/Toast.vue'
+import Loading from '~src/components/loading.vue'
+import ApiLoading from '~src/components/ApiLoading.vue'
+import popUp from '~src/components/popUp.vue'
+import BMap from '~src/components/BMap.vue'
 
 export default {
   name: 'app',
-  components: { Toast, Loading, ApiLoading, popUp },
+  components: { Toast, Loading, ApiLoading, popUp, BMap },
   computed: {
     loading () {
       return this.$store.state.loading
+    },
+    stores () {
+      return this.$store.state.map.stores
+    },
+    selectId () {
+      return this.$store.state.map.selectId
     }
   },
   methods: {
@@ -65,9 +72,6 @@ input, button, textarea, select
 a
   text-decoration none
 
-.dwf-wrap
-  background-color #f7f7f7
-
 .view
   position relative
 
@@ -100,6 +104,13 @@ a
 .no-scroll
   height 100%
   overflow hidden
+
+.star
+  display inline-block
+  width 15px
+  height 15px
+  background url(~src/public/star@2x.png) no-repeat
+  background-size 100% 100%
 
 </style>
 

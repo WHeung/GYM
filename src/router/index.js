@@ -1,11 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import MapView from '~src/views/map/index.vue'
+import goodsView from '~src/views/goodsView/index.vue'
+import detailView from '~src/views/detailView/index.vue'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
-    { path: '/map', name: 'MapView', component: MapView }
+    { path: '/goods', name: 'goodsView', component: goodsView },
+    { path: '/detail', name: 'detailView', component: detailView }
   ]
 })
