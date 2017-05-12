@@ -107,8 +107,8 @@ a
 
 .star
   display inline-block
-  width 15px
-  height 15px
+  width 10px
+  height 10px
   background url(~src/public/star@2x.png) no-repeat
   background-size 100% 100%
 

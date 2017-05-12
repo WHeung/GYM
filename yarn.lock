@@ -4935,6 +4935,12 @@ strip-json-comments@~2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-2.0.1.tgz#3c531942e908c2697c0ec344858c286c7ca0a60a"
 
+style-loader@^0.16.1:
+  version "0.16.1"
+  resolved "https://registry.yarnpkg.com/style-loader/-/style-loader-0.16.1.tgz#50e325258d4e78421dd9680636b41e8661595d10"
+  dependencies:
+    loader-utils "^1.0.2"
+
 stylus-loader@^2.4.0:
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/stylus-loader/-/stylus-loader-2.5.1.tgz#d5ad8a7e0958adc12b8581e7bb169b9a61d54216"

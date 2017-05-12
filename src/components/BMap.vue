@@ -46,38 +46,6 @@ export default {
     }
   },
   created () {
-    this.$store.commit(types.SET_MAP_STORES, [
-      {
-        id: 256,
-        longitude: 113.270894,
-        latitude: 23.139776,
-        price: 220,
-        name: '肌肉健身',
-        cover: 'http://cdn01.dwfei.com/img/city/80LANKAWEI.png',
-        star: 4,
-        evaluateNum: 53
-      },
-      {
-        id: 128,
-        longitude: 113.257476,
-        latitude: 23.142955,
-        price: 530,
-        name: '肥肉健身',
-        cover: 'http://cdn01.dwfei.com/img/city/Singapore_01.png',
-        star: 5,
-        evaluateNum: 340
-      },
-      {
-        id: 1024,
-        longitude: 113.275536,
-        latitude: 23.127731,
-        price: 5320,
-        name: '瘦肉健身',
-        cover: 'http://cdn01.dwfei.com/img/city/mangu_01.png',
-        star: 3,
-        evaluateNum: 5
-      }
-    ])
   },
   mounted () {
     this.map = new BMap.Map('allmap')    // 创建Map实例
