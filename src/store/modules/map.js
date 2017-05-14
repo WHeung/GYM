@@ -24,7 +24,7 @@ const Actions = {
   },
   [types.UPDATE_MAP_STORES] ({ commit, state, dispatch }, place) {
     return new Promise(resolve => {
-      CallApi(types.FETCH_MAP_SELECTED, place).then(res => {
+      CallApi(types.FETCH_MAP_STORES, place).then(res => {
         commit(types.SET_MAP_STORES, res.data.data)
         dispatch(types.UPDATE_MAP_SELECTED, res.data.data[0].id)
         resolve()

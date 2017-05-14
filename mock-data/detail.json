@@ -1,0 +1,14 @@
+{
+  "name":"detail",
+  "describe":"detail-data",
+  "url":"/detail",
+  "method":"POST",
+  "dataType":"JSON",
+  "responseKey":"a",
+  "responseOption":{
+    "a":{
+      "desc":"数据一",
+      "path":"./detail/a.json"
+    }
+  }
+}

@@ -4,42 +4,27 @@
     <div :class="$style.info" v-show="showInfo">
       <div :class="$style.base">
         <h4>俱乐部介绍</h4>
-        <p>威尔士，始于1996年，健身会所十大品牌，以提供个性化服务啊打开机房环境爱的色放很快就啊电视剧啊世界发达时间不见啊舒服的吧暗示大家看法哈大家发空间佛挡杀佛点卡</p>
+        <p>{{detail.intr}}</p>
       </div>
       <div :class="$style.concat">
         <div>
           <span :class="$style.concatTitle">地址 :</span>
-          <span>广州市海珠路8好号</span>
+          <span>{{detail.addr}}</span>
         </div>
         <div>
           <span :class="$style.concatTitle">联系电话 :</span>
-          <span>020-420 042 3344 024</span>
+          <span>{{detail.phone}}</span>
         </div>
         <div>
           <span :class="$style.concatTitle">在线顾问 :</span>
-          <span>jojo</span>
+          <span>{{detail.asker}}</span>
         </div>
       </div>
-      <div :class="$style.teacher">
+      <div :class="$style.teacher" v-if="detail.coach && detail.coach.length">
         <div :class="$style.teacherTitle">认证教练</div>
         <div :class="$style.teacherList">
-          <div :class="$style.item">
-            <img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2281807318,4086469053&fm=23&gp=0.jpg">
-          </div>
-          <div :class="$style.item">
-            <img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2281807318,4086469053&fm=23&gp=0.jpg">
-          </div>
-          <div :class="$style.item">
-            <img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2281807318,4086469053&fm=23&gp=0.jpg">
-          </div>
-          <div :class="$style.item">
-            <img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2281807318,4086469053&fm=23&gp=0.jpg">
-          </div>
-          <div :class="$style.item">
-            <img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2281807318,4086469053&fm=23&gp=0.jpg">
-          </div>
-          <div :class="$style.item">
-            <img src="">
+          <div :class="$style.item" v-for="coach in coaches">
+            <img :src="coach">
           </div>
         </div>
       </div>
@@ -48,11 +33,11 @@
     <div :class="$style.evaluate">
       <div :class="$style.evaluateLeft">
         <p :class="$style.price">
-          ￥ 2500 每年
+          ￥ {{detail.priceYears}} 每年
         </p>
         <p :class="$style.level">
-          <span><i class="star"></i> </span>
-          <span>33条评价</span>
+          <span v-if="detail.level"><i class="star" v-for="level in detail.level"></i> </span>
+          <span v-if="detail.evaluateNum">{{detail.evaluateNum}}条评价</span>
         </p>
       </div>
       <div :class="$style.evaluateRight">
@@ -71,13 +56,24 @@ export default {
       showInfo: false
     }
   },
+  computed: {
+    detail () {
+      return this.$store.state.detail.data
+    },
+    coaches () {
+      const coachList = this.$store.state.detail.data.coach
+      if (coachList && coachList.length) {
+        return coachList.length % 3 === 2 ? [...coachList, ''] : [...coachList]
+      } else {
+        return []
+      }
+    }
+  },
   created () {
-    this.$store.dispatch(types.CLOSE_LOADING)
-  },
-  mounted () {
-    this.showInfo = true
-  },
-  methods: {
+    this.$store.dispatch(types.UPDATE_DETAIL_DATA, 5).then(() => {
+      this.$store.dispatch(types.CLOSE_LOADING)
+      this.showInfo = true
+    })
   }
 }
 </script>

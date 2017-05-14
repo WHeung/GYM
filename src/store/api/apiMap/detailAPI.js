@@ -9,11 +9,11 @@ const axiosRequest = Axios.create({
   }
 })
 
-apiMap[Types.FETCH_MAP_STORES] = function (place) {
-  return axiosRequest.post('/goods/list',
+apiMap[Types.FETCH_DETAIL_DATA] = function (id) {
+  return axiosRequest.post('/detail',
     JSON.stringify({
       id: getTimeStampId(),
-      data: place
+      data: { id }
     })
   )
 }

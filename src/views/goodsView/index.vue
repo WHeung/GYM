@@ -1,10 +1,10 @@
 <template>
   <section :class="$style.main">
     <div :class="$style.btn">
-      <button type="button" name="button" @click="goDetail">筛选条件 ></button>
+      <button type="button" name="button">筛选条件 ></button>
     </div>
     <swiper :class="$style.goods" :options="swiperOption" ref="scrollView">
-      <swiper-slide :class="$style.item" v-for='good in goods' :ref="good.id">
+      <swiper-slide :class="$style.item" v-for='good in goods' :ref="good.id" @click="goDetail(good.id)">
         <img :src="good.cover">
         <div :class="$style.msg">
           <b>￥{{good.price}} </b>
@@ -37,6 +37,9 @@ export default {
         slidesPerView: 'auto',
         onTransitionStart: swiper => {
           this.$store.dispatch(types.UPDATE_MAP_SELECTED, this.goods[swiper.activeIndex].id)
+        },
+        onTap: swiper => {
+          this.$router.push({ path: '/detail/' + this.goods[swiper.activeIndex].id })
         }
       }
     }
@@ -66,9 +69,6 @@ export default {
     }
   },
   methods: {
-    goDetail () {
-      this.$refs.scrollView.swiper.translate = -280
-    }
   },
   created () {
     this.$store.dispatch(types.CLOSE_LOADING)
