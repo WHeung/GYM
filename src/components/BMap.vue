@@ -42,6 +42,7 @@ export default {
           oldMkr._div.className = 'map-point'
         }
         actMkr._div.className += ' active'
+        this.map.panTo(new BMap.Point(actMkr.longitude, actMkr.latitude))
       }
     }
   },
