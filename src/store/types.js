@@ -21,6 +21,7 @@ export const UPDATE_MAP_STORES = 'map_stores/update'
 export const UPDATE_MAP_SELECTED = 'map_selected/update'
 
 // api
+export const FETCH_MAP_SELECTED = 'map_selected/fetch'
 
 // http code
 export const UNKOWN_HTTP_ERROR = 'UNKOWN_HTTP_ERROR'

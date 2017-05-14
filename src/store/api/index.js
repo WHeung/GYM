@@ -1,8 +1,10 @@
 import { checkResponseCode } from './responseCode'
 import * as types from '../types'
 import store from '../'
+import goodsApi from './apiMap/goodsApi'
 
 const apiMap = {
+  ...goodsApi
 }
 
 export default function callApi (apiName, params) {
