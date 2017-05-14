@@ -41,11 +41,14 @@ export default {
 body,
 html
   font-family -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-  font-size 15px
   background-color #f7f7f7
   margin 0
   padding 0
   overflow-y scroll
+  color #353535
+  height 100%
+  overflow hidden
+  font-size 15px
   @media screen and (max-width: 340px)
     font-size 13px
 
