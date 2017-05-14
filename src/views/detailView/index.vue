@@ -2,9 +2,10 @@
   <section :class='$style.main'>
     <transition name="infotranslate">
     <div :class="$style.info" v-show="showInfo">
-      <div :class="$style.base">
+      <div :class="$style.base" v-if="detail.intr">
         <h4>俱乐部介绍</h4>
-        <p>{{detail.intr}}</p>
+        <p>{{limitIntr}}<span @click="toggleIntr" v-if="!switchIntr">阅读更多</span></p>
+        <span @click="toggleIntr" v-if="switchIntr">收起更多</span>
       </div>
       <div :class="$style.concat">
         <div>
@@ -53,7 +54,8 @@ import * as types from '~src/store/types'
 export default {
   data () {
     return {
-      showInfo: false
+      showInfo: false,
+      switchIntr: false
     }
   },
   computed: {
@@ -67,6 +69,13 @@ export default {
       } else {
         return []
       }
+    },
+    limitIntr () {
+      if (this.$store.state.detail.data.intr) {
+        return this.switchIntr ? this.$store.state.detail.data.intr : this.$store.state.detail.data.intr.slice(0, 30) + '......'
+      } else {
+        return ''
+      }
     }
   },
   created () {
@@ -74,6 +83,11 @@ export default {
       this.$store.dispatch(types.CLOSE_LOADING)
       this.showInfo = true
     })
+  },
+  methods: {
+    toggleIntr () {
+      this.switchIntr = !this.switchIntr
+    }
   }
 }
 </script>
@@ -114,7 +128,8 @@ export default {
       font-weight 500
       line-height 30px
       font-size 1.1em
-    /*p*/
+    span
+      color #32c47c
 
   .concat
     border-top 4px solid #b5b5b5
