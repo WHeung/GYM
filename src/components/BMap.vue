@@ -31,6 +31,7 @@ export default {
     },
     selectId: {
       handler (val, oldVal) {
+        console.log(val, oldVal)
         const mkrs = this.map.getOverlays()
         const actMkr = mkrs.find(item => {
           return item.id === val
@@ -41,6 +42,7 @@ export default {
           })
           oldMkr._div.className = 'map-point'
         }
+        console.log(actMkr)
         actMkr._div.className += ' active'
       }
     }
@@ -114,6 +116,7 @@ ComplexCustomOverlay.prototype.draw = function () {
     &.active
       background #32c47c
       color #fff
+      z-index 2
       &:after
         background #32c47c
 
