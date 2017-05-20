@@ -1,23 +1,10 @@
 <template>
   <section :class="$style.main">
     <div :class="$style.btn">
-      <button type="button" name="button" @click="goDetail">筛选条件 ></button>
+      <button type="button" name="button">筛选条件 ></button>
     </div>
-    <!-- <div :class="$style.goods" ref="scrollView">
-      <div :class="[$style.item,good.select && $style.active]" :ref="good.id" v-for='good in goods'>
-        <img :src="good.cover">
-        <div :class="$style.msg">
-          <b>￥ {{good.price}} </b>
-          <span>{{good.name}}</span>
-        </div>
-        <div :class="$style.evaluate">
-          <span><i class="star" v-for='star in good.star'></i> </span>
-          <span>{{good.evaluateNum}}条评价</span>
-        </div>
-      </div>
-    </div> -->
     <swiper :class="$style.goods" :options="swiperOption" ref="scrollView">
-      <swiper-slide :class="$style.item" v-for='good in goods' :ref="good.id">
+      <swiper-slide :class="$style.item" v-for='good in goods' :ref="good.id" @click="goDetail(good.id)">
         <img :src="good.cover">
         <div :class="$style.msg">
           <b>￥{{good.price}} </b>
@@ -40,7 +27,6 @@ export default {
   name: 'goods-View',
   data () {
     return {
-      goods: [],
       swiperOption: {
         notNextTick: true,
         initialSlide: 0,
@@ -51,11 +37,17 @@ export default {
         slidesPerView: 'auto',
         onTransitionStart: swiper => {
           this.$store.dispatch(types.UPDATE_MAP_SELECTED, this.goods[swiper.activeIndex].id)
+        },
+        onTap: swiper => {
+          this.$router.push({ path: '/detail/' + this.goods[swiper.activeIndex].id })
         }
       }
     }
   },
   computed: {
+    goods () {
+      return this.$store.state.map.stores
+    },
     selectId () {
       return this.$store.state.map.selectId
     },
@@ -77,56 +69,10 @@ export default {
     }
   },
   methods: {
-    goDetail () {
-      this.$refs.scrollView.swiper.translate = -280
-    }
   },
   created () {
     this.$store.dispatch(types.CLOSE_LOADING)
-    this.$store.commit(types.SET_MAP_STORES, [
-      {
-        id: 256,
-        longitude: 113.270894,
-        latitude: 23.139776,
-        price: 220,
-        name: '肌肉健身',
-        cover: 'http://cdn01.dwfei.com/img/city/80LANKAWEI.png',
-        star: 4,
-        evaluateNum: 53
-      },
-      {
-        id: 128,
-        longitude: 113.257476,
-        latitude: 23.142955,
-        price: 530,
-        name: '肥肉健身',
-        cover: 'http://cdn01.dwfei.com/img/city/Singapore_01.png',
-        star: 5,
-        evaluateNum: 340
-      },
-      {
-        id: 168,
-        longitude: 113.248659,
-        latitude: 23.124241,
-        price: 520,
-        name: '半肥瘦健身',
-        cover: 'http://cdn01.dwfei.com/img/city/Singapore_01.png',
-        star: 4,
-        evaluateNum: 3450
-      },
-      {
-        id: 1024,
-        longitude: 113.275536,
-        latitude: 23.127731,
-        price: 5320,
-        name: '瘦肉健身',
-        cover: 'http://cdn01.dwfei.com/img/city/mangu_01.png',
-        star: 3,
-        evaluateNum: 5
-      }
-    ])
-    this.goods = this.$store.state.map.stores
-    this.$store.dispatch(types.UPDATE_MAP_SELECTED, this.goods[0].id)
+    this.$store.dispatch(types.UPDATE_MAP_STORES, {})
   },
   components: { swiper, swiperSlide }
 }

@@ -1,14 +1,14 @@
 {
-  "name":"hotelList",
-  "describe":"hotelList",
-  "url":"/hotel/select-list",
+  "name":"goods",
+  "describe":"goods-list",
+  "url":"/goods/list",
   "method":"POST",
   "dataType":"JSON",
   "responseKey":"a",
   "responseOption":{
     "a":{
       "desc":"数据一",
-      "path":"./sales/hotel/hotel.json"
+      "path":"./goods/goodList/a.json"
     }
   }
 }

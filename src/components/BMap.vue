@@ -31,6 +31,7 @@ export default {
     },
     selectId: {
       handler (val, oldVal) {
+        console.log(val, oldVal)
         const mkrs = this.map.getOverlays()
         const actMkr = mkrs.find(item => {
           return item.id === val
@@ -41,6 +42,7 @@ export default {
           })
           oldMkr._div.className = 'map-point'
         }
+        console.log(actMkr)
         actMkr._div.className += ' active'
         this.map.panTo(new BMap.Point(actMkr.longitude, actMkr.latitude))
       }
@@ -114,9 +116,12 @@ ComplexCustomOverlay.prototype.draw = function () {
       background #f7f7f7
     &.active
       background #32c47c
+      border 1px solid #32c47c
       color #fff
+      z-index 2
       &:after
         background #32c47c
+        border 1px solid #32c47c
 
 
 </style>

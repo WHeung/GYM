@@ -1,4 +1,5 @@
 import * as types from '../types'
+import CallApi from '../api'
 
 const State = {
   stores: [],
@@ -20,6 +21,15 @@ const Actions = {
       return
     }
     commit(types.SET_MAP_SELECTID, id)
+  },
+  [types.UPDATE_MAP_STORES] ({ commit, state, dispatch }, place) {
+    return new Promise(resolve => {
+      CallApi(types.FETCH_MAP_STORES, place).then(res => {
+        commit(types.SET_MAP_STORES, res.data.data)
+        dispatch(types.UPDATE_MAP_SELECTED, res.data.data[0].id)
+        resolve()
+      })
+    })
   }
 }
 
