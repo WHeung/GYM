@@ -1,7 +1,7 @@
 <template>
   <section :class="$style.main">
     <div :class="$style.btn">
-      <button type="button" name="button">筛选条件 ></button>
+      <button type="button" name="button" @click="goFilter">筛选条件 ></button>
     </div>
     <swiper :class="$style.goods" :options="swiperOption" ref="scrollView">
       <swiper-slide :class="$style.item" v-for='good in goods' :ref="good.id" @click="goDetail(good.id)">
@@ -69,6 +69,9 @@ export default {
     }
   },
   methods: {
+    goFilter () {
+      this.$router.push({ name: 'filterView' })
+    }
   },
   created () {
     this.$store.dispatch(types.CLOSE_LOADING)

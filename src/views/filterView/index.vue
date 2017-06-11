@@ -3,17 +3,27 @@
     <div :class="$style.modify">
       <div :class="$style.priceGroup">
         <h3>价格范围</h3>
-        <span>￥35 - ￥150</span>
+        <span>{{priceRangeList[priceRange].rangeStr}}</span>
         <div :class="$style.progress">
-
+          <input type="range" v-model="priceRange" :max="priceRangeList.length-1" min="0" step="1">
         </div>
         <div :class="$style.priceYears">
           <span>平均每月￥</span>&nbsp;&nbsp;<span>27000</span>
         </div>
       </div>
       <div :class="$style.kindGroup">
-        <div :class="$style.fervent">星级 &nbsp;<span>7</span></div>
-        <div :class="$style.distance">距离 &nbsp;<span>2KM</span></div>
+        <div :class="$style.fervent">
+          星级 &nbsp;<span>{{level}}</span>
+          <select v-model="level">
+            <option :value="item" v-for="item in 5"></option>
+          </select>
+        </div>
+        <div :class="$style.distance">
+          距离 &nbsp;<span>{{distanceList[distance].distanceStr}}</span>
+          <select v-model="distance">
+            <option :value="index" :label="item.distanceStr" v-for="(item, index) in distanceList"></option>
+          </select>
+        </div>
         <div :class="$style.basicType">
           健身项目
           <div :class="$style.basic">
@@ -32,7 +42,7 @@
       </div>
     </div>
     <div :class="$style.btnGroup">
-      <button type="button" name="button">搜索</button>
+      <button type="button" name="button" @click="handleSearch">搜索</button>
     </div>
   </section>
 </template>
@@ -43,6 +53,45 @@ import * as types from '~src/store/types'
 export default {
   data () {
     return {
+      priceRangeList: [
+        {
+          id: 1,
+          rangeStr: '￥150以下'
+        }, {
+          id: 2,
+          rangeStr: '￥151 - ￥500'
+        }, {
+          id: 3,
+          rangeStr: '￥501 - ￥1000'
+        }, {
+          id: 4,
+          rangeStr: '￥1001 - ￥1500'
+        }, {
+          id: 5,
+          rangeStr: '￥1501 - ￥2000'
+        }, {
+          id: 6,
+          rangeStr: '￥2000以上'
+        }
+      ],
+      priceRange: 0,
+      level: 5,
+      distanceList: [
+        {
+          id: 1,
+          distanceStr: '1KM以内'
+        }, {
+          id: 2,
+          distanceStr: '2KM以内'
+        }, {
+          id: 3,
+          distanceStr: '5KM以内'
+        }, {
+          id: 4,
+          distanceStr: '10KM以内'
+        }
+      ],
+      distance: 0,
       currentIndex: []
     }
   },
@@ -71,6 +120,9 @@ export default {
       if (i === this.currentIndex.length) {
         this.currentIndex.push(index)
       }
+    },
+    handleSearch () {
+      this.$router.push({ name: 'goodsView' })
     }
   }
 }
@@ -96,20 +148,57 @@ export default {
     margin 10px 0
     span:first-child
       color #32c47c
+  .progress
+    margin-top 10px
+    display flex
+    justify-content center
+    input
+      -webkit-appearance none
+      width 65%
+      border-radius 10px
+      &::-webkit-slider-thumb
+        -webkit-appearance none
+      &::-webkit-slider-runnable-track
+        height 8px
+        border-radius 10px
+        box-shadow 0 1px 1px #def3f8, inset 0 .08em .08em #0d1112
+      &::-webkit-slider-thumb
+        -webkit-appearance: none
+        height 20px
+        width 20px
+        margin-top -5px
+        background #ffffff
+        border-radius 50%
+        border solid 0.125em rgba(205, 224, 230, 0.5)
+        box-shadow 0 .125em .125em #3b4547
+      &:focus
+        outline none
 
 .kindGroup
   color #32c47c
   padding 10px 2px
   .fervent
+    position relative
     span
       background #b7b7b7
       color #fff
       padding 0 10px
       border-radius 4px
+    select
+      position absolute
+      top 0
+      opacity 0
+      width 100%
   .distance
     margin-top 20px
+    position relative
     span
       color #b7b7b7
+    select
+      position absolute
+      top 0
+      opacity 0
+      width 100%
   .basicType
     margin-top 20px
     .basic

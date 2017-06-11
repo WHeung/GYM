@@ -120,6 +120,8 @@ export default {
     max-height 70%
     overflow-y auto
     overflow-x hidden
+    &::-webkit-scrollbar
+      display none
 
   .base
     margin-bottom 20px
