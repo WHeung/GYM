@@ -1,5 +1,6 @@
 import * as types from '../types'
 import CallApi from '../api'
+import data from '~src/../mock-data/goods/goodList/a.json'
 
 const State = {
   stores: [],
@@ -24,11 +25,14 @@ const Actions = {
   },
   [types.UPDATE_MAP_STORES] ({ commit, state, dispatch }, place) {
     return new Promise(resolve => {
-      CallApi(types.FETCH_MAP_STORES, place).then(res => {
+      /* CallApi(types.FETCH_MAP_STORES, place).then(res => {
         commit(types.SET_MAP_STORES, res.data.data)
         dispatch(types.UPDATE_MAP_SELECTED, res.data.data[0].id)
         resolve()
-      })
+      }) */
+      commit(types.SET_MAP_STORES, data.data)
+      dispatch(types.UPDATE_MAP_SELECTED, data.data[0].id)
+      resolve()
     })
   }
 }

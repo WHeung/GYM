@@ -153,6 +153,7 @@ export default {
     display flex
     justify-content center
     input
+      background rgba(0, 168, 255, .5)
       -webkit-appearance none
       width 65%
       border-radius 10px
